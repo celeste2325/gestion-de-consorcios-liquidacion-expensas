@@ -2,7 +2,7 @@ package controller;
 
 import model.Consorcio;
 import model.Gasto;
-import model.TipoDeExpensa;
+import model.TipoExpensa;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,10 +14,11 @@ public class ControladorConsorcios {
     public ControladorConsorcios() {
         this.consorcios = new ArrayList<>();
     }
-    public void cargarGastos(String cuitConsorcio, Gasto...gastosMensuales) {
+
+    public void cargarGastos(String cuitConsorcio, Gasto...gastos) {
         Consorcio consorcio = getConsorcioByCuit(cuitConsorcio);
         if(consorcio != null) {
-            consorcio.addGastos(gastosMensuales);
+            consorcio.addGastos(gastos);
         } else {
             System.out.println("no se encontro el consorcio");
         }
@@ -27,7 +28,7 @@ public class ControladorConsorcios {
         return this.consorcios.stream().filter(c->c.isConsorcio(cuitConsorcio)).findFirst().get();
     }
 
-    public double sumarGastos(String cuitConsorcio, TipoDeExpensa tipoExpensa) {
+    public double sumarGastos(String cuitConsorcio, TipoExpensa tipoExpensa) {
         Consorcio consorcio = getConsorcioByCuit(cuitConsorcio);
         if(consorcio != null) {
             return consorcio.sumarGastosPorTipoExpensa(tipoExpensa);

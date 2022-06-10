@@ -14,14 +14,13 @@ public class Consorcio {
     @Getter
     @Setter
     private String cuit;
-    private List<Administrador> administradores;
     @Getter
     private List<Gasto> gastos;
     private List<UnidadFuncional> unidadesFuncionales;
     private String cuentaBancaria;
     private float saldoActual;
     //consultar si es necesario que el consorcio tenga una lista de expensas
-
+    //TODO
     //saque del constructor el saldo actual. Con el cbu lo calcula
     //se mockea en el test para pedir al componente saldo cuenta
     public Consorcio(String cuentaBancaria, String nombre, String cuit) {
@@ -29,11 +28,7 @@ public class Consorcio {
         this.cuit = cuit;
         this.cuentaBancaria = cuentaBancaria;
         this.unidadesFuncionales = new ArrayList<UnidadFuncional>();
-        this.administradores = new ArrayList<Administrador>();
         this.gastos = new ArrayList<Gasto>();
-    }
-    public void addAdministradores(Administrador ...administradores) {
-        Collections.addAll(this.administradores, administradores);
     }
     public void addGastos(Gasto ...gastos) {
         Collections.addAll(this.gastos, gastos);
@@ -48,7 +43,7 @@ public class Consorcio {
         return false;
     }
 
-    public double sumarGastosPorTipoExpensa(TipoDeExpensa tipoExpensa) {
+    public double sumarGastosPorTipoExpensa(TipoExpensa tipoExpensa) {
         return this.gastos.stream().filter(g-> g.isTipoExpensa(tipoExpensa)).mapToDouble(Gasto::getMonto).sum();
     }
 
