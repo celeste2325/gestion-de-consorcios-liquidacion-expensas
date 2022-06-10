@@ -41,18 +41,4 @@ public class ControladorConsorcios {
         Collections.addAll(this.consorcios,consorcios);
     }
 
-    //esperando respuesta del profesor si en conveniente hacer la suma aqui o en el controlador
-    //TODO
-    /*public double sumarGastos(String cuitConsorcio, TipoDeExpensa tipoExpensa) {
-        Consorcio consorcio = getConsorcioByCuit(cuitConsorcio);
-        if(consorcio != null) {
-            return sumarGastosPorTipoExpensa(consorcio, tipoExpensa);
-        } else {
-            System.out.println("no se encontro el consorcio");
-        }
-        return 0;
-    }
-    public double sumarGastosPorTipoExpensa(Consorcio consorcio, TipoDeExpensa tipoExpensa) {
-        return consorcio.getGastos().stream().filter(g-> g.isTipoExpensa(tipoExpensa)).mapToDouble(Gasto::getMonto).sum();
-    }*/
 }

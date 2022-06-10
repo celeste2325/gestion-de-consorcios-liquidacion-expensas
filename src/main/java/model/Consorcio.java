@@ -48,8 +48,6 @@ public class Consorcio {
         return false;
     }
 
-    //esperando respuesta del profesor si en conveniente hacer la suma aqui o en el controlador
-    //TODO
     public double sumarGastosPorTipoExpensa(TipoDeExpensa tipoExpensa) {
         return this.gastos.stream().filter(g-> g.isTipoExpensa(tipoExpensa)).mapToDouble(Gasto::getMonto).sum();
     }
