@@ -1,4 +1,6 @@
 package model;
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,6 +10,7 @@ public class UnidadFuncional {
     private float metrosCuadrados;
     private List<Persona> inquilinos;
     private List<Expensa> expensas;
+    @Getter
     private float porcentajeAPagar;
     private float deuda;
 
@@ -21,7 +24,7 @@ public class UnidadFuncional {
     public void addInquilinos(Persona ...personas) {
         Collections.addAll(this.inquilinos, personas);
     }
-    public void addExpensas(Expensa ...expensas) {
+    public void addExpensas(Expensa...expensas) {
         Collections.addAll(this.expensas, expensas);
     }
 

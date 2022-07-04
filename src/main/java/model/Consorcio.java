@@ -3,9 +3,7 @@ package model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Consorcio {
     // si no vamos a crear la clase administrador hay que sacar esta lista
@@ -16,7 +14,9 @@ public class Consorcio {
     private String cuit;
     @Getter
     private List<Gasto> gastos;
+    @Getter
     private List<UnidadFuncional> unidadesFuncionales;
+    private Map<TipoExpensa, Double> valorExpensa = new HashMap<>();
     private String cuentaBancaria;
     private float saldoActual;
     //consultar si es necesario que el consorcio tenga una lista de expensas

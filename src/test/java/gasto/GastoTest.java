@@ -47,13 +47,13 @@ public void init() {
 @Test
 public void sumaGastosDeExpensaOrdinariaDevuelve3500() {
     this.controladorConsorcio.cargarGastos(this.consorcio.getCuit(),luz,agua,gas);
-    Assertions.assertEquals(35000,this.controladorConsorcio.sumarGastos(this.consorcio.getCuit(), TipoExpensa.ORDINARIA));
+    Assertions.assertEquals(35000,this.controladorConsorcio.sumarGastosPorTipoExpensa(this.consorcio.getCuit(), TipoExpensa.ORDINARIA));
 }
 
 @Test
 public void sumaGastosDeExpensaExtraOrdinariaDevuelve36000() {
     this.controladorConsorcio.cargarGastos(this.consorcio.getCuit(),mantAscensores,mantPartesComunes,luz,agua);
-    Assertions.assertEquals(36000,this.controladorConsorcio.sumarGastos(this.consorcio.getCuit(), TipoExpensa.EXTRAORIDINARIA));
+    Assertions.assertEquals(36000,this.controladorConsorcio.sumarGastosPorTipoExpensa(this.consorcio.getCuit(), TipoExpensa.EXTRAORIDINARIA));
     }
 
 }

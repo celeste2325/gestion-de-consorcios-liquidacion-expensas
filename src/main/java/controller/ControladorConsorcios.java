@@ -1,15 +1,17 @@
 package controller;
 
+import lombok.Getter;
 import model.Consorcio;
 import model.Gasto;
 import model.TipoExpensa;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
+import java.util.*;
+@Getter
 public class ControladorConsorcios {
+
     private List<Consorcio> consorcios;
+
+    private Map <TipoExpensa, Double> valorExpensa = new HashMap<>();
 
     public ControladorConsorcios() {
         this.consorcios = new ArrayList<>();
@@ -23,23 +25,27 @@ public class ControladorConsorcios {
             System.out.println("no se encontro el consorcio");
         }
     }
+    public void addConsorcios(Consorcio ...consorcios) {
+        Collections.addAll(this.consorcios,consorcios);
+    }
 
     private Consorcio getConsorcioByCuit(String cuitConsorcio) {
         return this.consorcios.stream().filter(c->c.isConsorcio(cuitConsorcio)).findFirst().get();
     }
 
-    public double sumarGastos(String cuitConsorcio, TipoExpensa tipoExpensa) {
+    public double sumarGastosPorTipoExpensa(String cuitConsorcio, TipoExpensa tipoExpensa) {
         Consorcio consorcio = getConsorcioByCuit(cuitConsorcio);
         if(consorcio != null) {
-            return consorcio.sumarGastosPorTipoExpensa(tipoExpensa);
+            double totalGasto = consorcio.sumarGastosPorTipoExpensa(tipoExpensa);
+            addMapValorExpensa(tipoExpensa,totalGasto);
+            return totalGasto;
         } else {
             System.out.println("no se encontro el consorcio");
         }
         return 0;
     }
-
-    public void addConsorcios(Consorcio ...consorcios) {
-        Collections.addAll(this.consorcios,consorcios);
+    public void addMapValorExpensa(TipoExpensa tipo, double totalGasto) {
+        valorExpensa.put(tipo,totalGasto);
     }
 
 }
