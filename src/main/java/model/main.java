@@ -18,12 +18,12 @@ public class main {
     public static void main(String[] args) {
         ControladorConsorcios controladorConsorcio;
         Consorcio consorcio;
-        Persona inquilino1 = new Persona("Camila","Rodriguez", "9584712", "camila@gmail.com", "1151745896", false);
-        Persona inquilino2 = new Persona("Candela","Perez", "91785412", "candela@gmail.com", "1196325412", false);
-        Persona propietario1 = new Persona("Josue","Velasquez", "9354785", "josue@gmail.com", "1156987424", true);
-        Persona propietario2 = new Persona("Tomas","Benitez", "90542871", "tomas@gmail.com", "1156398741", true);
+        Persona inquilino1 = new Persona("Camila","Rodriguez", "9584712", "camila@gmail.com", "1151745896", false, null);
+        Persona inquilino2 = new Persona("Candela","Perez", "91785412", "candela@gmail.com", "1196325412", false, null);
+        Persona propietario1 = new Persona("Josue","Velasquez", "9354785", "josue@gmail.com", "1156987424", true, null);
+        Persona propietario2 = new Persona("Tomas","Benitez", "90542871", "tomas@gmail.com", "1156398741", true, null);
 
-        consorcio = new Consorcio("000000", "boedo 1625", "27896421");
+        consorcio = new Consorcio("000000", "krak","boedo 1625", "27896421");
 
         UnidadFuncional unidFunc1 = new UnidadFuncional(consorcio, 25,70);
         unidFunc1.addInquilinos(inquilino1,inquilino2,propietario1);
@@ -32,7 +32,7 @@ public class main {
 
         consorcio.addUnidadesFuncionales(unidFunc1,unidFunc2);
 
-        controladorConsorcio = new ControladorConsorcios();
+        controladorConsorcio = ControladorConsorcios.getInstance();
         controladorConsorcio.addConsorcios(consorcio);
 
         Gasto luz = new Gasto(8000, TipoExpensa.ORDINARIA, true, LocalDate.now());
@@ -49,8 +49,7 @@ public class main {
         System.out.println(sumaExtraordinaria);
         System.out.println(sumaOrdinaria);
 
-        Expensa docExpensa = new Expensa(LocalDate.now());
-        CalculadorExpensa calcExpensa = new CalculadorExpensa();
-        calcExpensa.calcularExpensa(controladorConsorcio);
+        controladorConsorcio.calcularExpensa("27896421");
+
     }
 }

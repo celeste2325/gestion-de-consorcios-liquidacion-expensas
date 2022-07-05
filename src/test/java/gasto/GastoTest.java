@@ -20,10 +20,10 @@ public class GastoTest {
 
 @BeforeEach
 public void init() {
-    Persona inquilino1 = new Persona("Camila","Rodriguez", "9584712", "camila@gmail.com", "1151745896", false);
-    Persona inquilino2 = new Persona("Candela","Perez", "91785412", "candela@gmail.com", "1196325412", false);
-    Persona propietario1 = new Persona("Josue","Velasquez", "9354785", "josue@gmail.com", "1156987424", true);
-    Persona propietario2 = new Persona("Tomas","Benitez", "90542871", "tomas@gmail.com", "1156398741", true);
+    Persona inquilino1 = new Persona("Camila","Rodriguez", "9584712", "camila@gmail.com", "1151745896", false, null);
+    Persona inquilino2 = new Persona("Candela","Perez", "91785412", "candela@gmail.com", "1196325412", false, null);
+    Persona propietario1 = new Persona("Josue","Velasquez", "9354785", "josue@gmail.com", "1156987424", true, null);
+    Persona propietario2 = new Persona("Tomas","Benitez", "90542871", "tomas@gmail.com", "1156398741", true, null);
 
     this.consorcio = new Consorcio("000000", "boedo 1625", "27896421");
 
@@ -34,7 +34,7 @@ public void init() {
 
     consorcio.addUnidadesFuncionales(unidFunc1,unidFunc2);
 
-    this.controladorConsorcio = new ControladorConsorcios();
+    this.controladorConsorcio = ControladorConsorcios.getInstance();
     this.controladorConsorcio.addConsorcios(this.consorcio);
 
     this.luz = new Gasto(8000, TipoExpensa.ORDINARIA, true, LocalDate.now());

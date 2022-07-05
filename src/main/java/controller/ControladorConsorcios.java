@@ -8,13 +8,18 @@ import model.TipoExpensa;
 import java.util.*;
 @Getter
 public class ControladorConsorcios {
-
+    private static ControladorConsorcios contConsorcio = null;
+    CalculadorExpensa calcExpensa = new CalculadorExpensa();
     private List<Consorcio> consorcios;
-
-    private Map <TipoExpensa, Double> valorExpensa = new HashMap<>();
-
-    public ControladorConsorcios() {
+    private ControladorConsorcios() {
         this.consorcios = new ArrayList<>();
+    }
+
+    public static ControladorConsorcios getInstance() {
+        if (contConsorcio == null) {
+            contConsorcio = new ControladorConsorcios();
+        }
+        return contConsorcio;
     }
 
     public void cargarGastos(String cuitConsorcio, Gasto...gastos) {
@@ -36,16 +41,21 @@ public class ControladorConsorcios {
     public double sumarGastosPorTipoExpensa(String cuitConsorcio, TipoExpensa tipoExpensa) {
         Consorcio consorcio = getConsorcioByCuit(cuitConsorcio);
         if(consorcio != null) {
-            double totalGasto = consorcio.sumarGastosPorTipoExpensa(tipoExpensa);
-            addMapValorExpensa(tipoExpensa,totalGasto);
-            return totalGasto;
+            return consorcio.sumarGastosPorTipoExpensa(tipoExpensa);
         } else {
             System.out.println("no se encontro el consorcio");
         }
         return 0;
     }
-    public void addMapValorExpensa(TipoExpensa tipo, double totalGasto) {
-        valorExpensa.put(tipo,totalGasto);
+
+    public void calcularExpensa(String cuitConsorcio) {
+        Consorcio consorcio = this.getConsorcioByCuit(cuitConsorcio);
+        if (consorcio != null) {
+            this.calcExpensa.calcularExpensa(consorcio);
+        }else {
+            System.out.println("el consorcio no existe");
+        }
+
     }
 
 }
