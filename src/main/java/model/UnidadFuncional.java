@@ -9,7 +9,7 @@ import java.util.List;
 public class UnidadFuncional {
     private Consorcio consorcio;
     private float metrosCuadrados;
-    private List<Persona> inquilinos;
+    private List<Persona> personas;
     private List<Expensa> expensas;
     private float porcentajeAPagar;
     private float deuda;
@@ -17,18 +17,19 @@ public class UnidadFuncional {
     public UnidadFuncional(Consorcio consorcio, float metrosCuadrados, float porcentajeAPagar) {
         this.consorcio = consorcio;
         this.metrosCuadrados = metrosCuadrados;
-        this.inquilinos = new ArrayList<>();
+        this.personas = new ArrayList<>();
+        this.expensas = new ArrayList<>();
         this.porcentajeAPagar = porcentajeAPagar;
     }
 
     public void addInquilinos(Persona ...personas) {
-        Collections.addAll(this.inquilinos, personas);
+        Collections.addAll(this.personas, personas);
     }
     public void addExpensas(Expensa...expensas) {
         Collections.addAll(this.expensas, expensas);
     }
 
     public void enviarNotificacionExpensa(Expensa expensa) {
-        this.inquilinos.forEach(i -> i.enviarNotificacionAlMedio(expensa));
+        this.personas.forEach(i -> i.enviarNotificacionAlMedio(expensa));
     }
 }

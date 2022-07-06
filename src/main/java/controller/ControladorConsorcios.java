@@ -9,8 +9,9 @@ import java.util.*;
 @Getter
 public class ControladorConsorcios {
     private static ControladorConsorcios contConsorcio = null;
-    CalculadorExpensa calcExpensa = new CalculadorExpensa();
+    CalculadorExpensa calculadorExpensa = new CalculadorExpensa();
     private List<Consorcio> consorcios;
+
     private ControladorConsorcios() {
         this.consorcios = new ArrayList<>();
     }
@@ -48,14 +49,15 @@ public class ControladorConsorcios {
         return 0;
     }
 
-    public void calcularExpensa(String cuitConsorcio) {
+    public double calcularExpensa(String cuitConsorcio) {
         Consorcio consorcio = this.getConsorcioByCuit(cuitConsorcio);
         if (consorcio != null) {
-            this.calcExpensa.calcularExpensa(consorcio);
+            return this.calculadorExpensa.calcularExpensa(consorcio);
         }else {
             System.out.println("el consorcio no existe");
         }
 
+        return 0;
     }
 
 }
