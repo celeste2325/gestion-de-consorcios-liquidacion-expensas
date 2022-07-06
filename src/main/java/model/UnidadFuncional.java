@@ -28,7 +28,7 @@ public class UnidadFuncional {
         Collections.addAll(this.expensas, expensas);
     }
 
-    public void enviarNotificacionExpensa(Double monto) {
-        this.inquilinos.forEach(i -> i.enviarNotificacionAlMedio(monto));
+    public void enviarNotificacionExpensa(Expensa expensa) {
+        this.inquilinos.forEach(i -> i.enviarNotificacionAlMedio(expensa));
     }
 }

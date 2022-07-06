@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter @Setter
 public class Persona {
@@ -25,8 +26,8 @@ public class Persona {
         this.medioNotificacion = medioNotificacion;
     }
 
-    public void enviarNotificacionAlMedio(double monto){
-        if(this.medioNotificacion != null){this.medioNotificacion.enviarNotificacion(monto, LocalDate.now());}
+    public void enviarNotificacionAlMedio(Expensa expensa){
+        if(this.medioNotificacion != null){this.medioNotificacion.enviarNotificacion(LocalDateTime.now(),this, expensa);}
 
     }
 }

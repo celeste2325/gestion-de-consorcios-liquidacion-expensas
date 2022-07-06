@@ -1,30 +1,33 @@
 package controller;
 
-import model.Consorcio;
-import model.SaldoCuenta;
-import model.TipoExpensa;
-import model.UnidadFuncional;
+import model.*;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Map;
 
 public class CalculadorExpensa{
-
+    private double totalExpensa;
     private SaldoCuenta saldo;
     public void calcularExpensa(Consorcio consorcio) {
-        double saldoActual = this.saldo.devolverSaldoActual(consorcio.getCbu(),"6666", LocalDate.now());
-
-        double sumaTotalGastos = totalGastos(consorcio.getValorExpensa()) - saldoActual;
-        Map <UnidadFuncional, Double> unidadFuncional_monto = new HashMap<>();
-        unidadFuncional_monto = this.montoPorUnidadFuncional(sumaTotalGastos, consorcio);
-        this.enviarNotificacion(unidadFuncional_monto);
+       // double saldoActual = this.saldo.devolverSaldoActual(consorcio.getCbu(),"6666", LocalDate.now());
+        double sumaTotalGastos = totalGastos(consorcio.getValorExpensa()) - 300;
+        System.out.println("total"+sumaTotalGastos);
+        this.generarExpensa(consorcio, sumaTotalGastos);
     }
 
-    private void enviarNotificacion(Map<UnidadFuncional, Double> unidadFuncional_monto) {
-        for (Map.Entry<UnidadFuncional, Double> valorPoUnidadFuncional : unidadFuncional_monto.entrySet()) {
-            valorPoUnidadFuncional.getKey().enviarNotificacionExpensa(valorPoUnidadFuncional.getValue());
+    private void generarExpensa(Consorcio consorcio, double sumaGastos) {
+        double valorOrdinario = consorcio.sumarGastosPorTipoExpensa(TipoExpensa.ORDINARIA);
+        double valorExtraOrdinario = consorcio.sumarGastosPorTipoExpensa(TipoExpensa.EXTRAORIDINARIA);
+
+        for (UnidadFuncional unidadesFuncional : consorcio.getUnidadesFuncionales()) {
+            this.totalExpensa = ((sumaGastos * unidadesFuncional.getPorcentajeAPagar()) / 100) + unidadesFuncional.getDeuda();
+            Expensa expensa = new Expensa(LocalDate.now(),valorOrdinario, valorExtraOrdinario, this.totalExpensa);
+            this.enviarNotificacion(unidadesFuncional,expensa);
         }
+    }
+
+    private void enviarNotificacion(UnidadFuncional unidadFuncional, Expensa expensa) {
+        unidadFuncional.enviarNotificacionExpensa(expensa);
     }
 
     public double totalGastos(Map <TipoExpensa, Double> valorExpensa) {
@@ -34,13 +37,16 @@ public class CalculadorExpensa{
         }
         System.out.println("valores sumados"+valorSuma);
         return valorSuma;
+
+
     }
-    public Map<UnidadFuncional, Double> montoPorUnidadFuncional(double totalGastos, Consorcio consorcio) {
+    /*public Map<UnidadFuncional, Double> montoPorUnidadFuncional(double totalGastos, Consorcio consorcio) {
         Map <UnidadFuncional, Double> unidadFuncionalValorApagar = new HashMap<>();
 
             for (UnidadFuncional unidadesFuncional : consorcio.getUnidadesFuncionales()) {
+                this.totalExpensa = ((totalGastos * unidadesFuncional.getPorcentajeAPagar()) / 100) + unidadesFuncional.getDeuda();
                 unidadFuncionalValorApagar.put(unidadesFuncional,
-                        (totalGastos * unidadesFuncional.getPorcentajeAPagar()) / 100);
+                        this.totalExpensa);
             }
         for (Map.Entry<UnidadFuncional, Double> valorPoUnidadFuncional : unidadFuncionalValorApagar.entrySet()) {
             System.out.println("unidadFuncional porcentaje a pagar" + valorPoUnidadFuncional.getKey().getPorcentajeAPagar() +
@@ -48,5 +54,5 @@ public class CalculadorExpensa{
         }
 
         return unidadFuncionalValorApagar;
-    }
+    }*/
 }

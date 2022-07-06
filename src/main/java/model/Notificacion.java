@@ -1,7 +1,7 @@
 package model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public abstract class Notificacion {
-    public abstract void enviarNotificacion(double monto, LocalDate fecha);
+    public abstract void enviarNotificacion(LocalDateTime fechaYhora, Persona persona, Expensa expensa);
 }

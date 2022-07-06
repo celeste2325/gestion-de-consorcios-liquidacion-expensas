@@ -5,6 +5,7 @@ import model.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 
@@ -25,7 +26,7 @@ public void init() {
     Persona propietario1 = new Persona("Josue","Velasquez", "9354785", "josue@gmail.com", "1156987424", true, null);
     Persona propietario2 = new Persona("Tomas","Benitez", "90542871", "tomas@gmail.com", "1156398741", true, null);
 
-    this.consorcio = new Consorcio("000000", "boedo 1625", "27896421");
+    this.consorcio = new Consorcio("000000","pepito","pepitoA", "27896421");
 
     UnidadFuncional unidFunc1 = new UnidadFuncional(consorcio, 25,25);
     unidFunc1.addInquilinos(inquilino1,inquilino2,propietario1);
@@ -55,6 +56,8 @@ public void sumaGastosDeExpensaExtraOrdinariaDevuelve36000() {
     this.controladorConsorcio.cargarGastos(this.consorcio.getCuit(),mantAscensores,mantPartesComunes,luz,agua);
     Assertions.assertEquals(36000,this.controladorConsorcio.sumarGastosPorTipoExpensa(this.consorcio.getCuit(), TipoExpensa.EXTRAORIDINARIA));
     }
+
+
 
 }
 
