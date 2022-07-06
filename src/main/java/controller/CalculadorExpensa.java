@@ -12,6 +12,7 @@ public class CalculadorExpensa{
        // double saldoActual = this.saldo.devolverSaldoActual(consorcio.getCbu(),"6666", LocalDate.now());
         double sumaTotalGastos = totalGastos(consorcio.getValorExpensa()) - 300;
         this.generarExpensa(consorcio, sumaTotalGastos);
+        System.out.println("suma total de expensas= " + sumaTotalGastos);
         return sumaTotalGastos;
     }
 
@@ -23,6 +24,7 @@ public class CalculadorExpensa{
             double totalExpensa = ((sumaGastos * unidadesFuncional.getPorcentajeAPagar()) / 100) + unidadesFuncional.getDeuda();
             Expensa expensa = new Expensa(LocalDate.now(),valorOrdinario, valorExtraOrdinario, totalExpensa);
             unidadesFuncional.addExpensas(expensa);
+            System.out.println("porcentaje a pagar: " + unidadesFuncional.getPorcentajeAPagar()+ " %  | " + "expensa: " +expensa.getTotal());
             this.enviarNotificacion(unidadesFuncional,expensa);
         }
     }

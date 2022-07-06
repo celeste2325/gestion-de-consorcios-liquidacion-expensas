@@ -2,6 +2,7 @@ package gasto;
 
 import controller.ControladorConsorcios;
 import model.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ public class GastoTest {
     private Gasto mantPartesComunes;
 
 
-    @BeforeEach
+    @BeforeEach //debe ejecutarse antes de cada test
     public void init() {
 
         Persona inquilino1 = new Persona("Camila", "Rodriguez", "9584712", "camila@gmail.com", "1151745896", false, null);
@@ -46,6 +47,11 @@ public class GastoTest {
         this.mantAscensores = new Gasto(6000, TipoExpensa.EXTRAORIDINARIA, false, LocalDate.now());
         this.mantPartesComunes = new Gasto(30000, TipoExpensa.EXTRAORIDINARIA, false, LocalDate.now());
     }
+    @AfterEach //debe ejecutarse despues de cada test
+    public void cleanData(){
+        this.controladorConsorcio.cleanGastosConsorcio();
+
+    }
 
     @Test
     public void sumaGastosDeExpensaOrdinariaDevuelve3500() {
@@ -61,8 +67,11 @@ public class GastoTest {
 
     @Test
     public void devuelveTotalDeGastosGenerales_56000() {
-        this.sumaGastosDeExpensaOrdinariaDevuelve3500();
-        this.sumaGastosDeExpensaExtraOrdinariaDevuelve36000();
+        this.controladorConsorcio.cargarGastos(this.consorcio.getCuit(), luz, agua, gas);
+        this.controladorConsorcio.sumarGastosPorTipoExpensa(this.consorcio.getCuit(), TipoExpensa.ORDINARIA);
+
+        this.controladorConsorcio.cargarGastos(this.consorcio.getCuit(), mantAscensores, mantPartesComunes);
+        this.controladorConsorcio.sumarGastosPorTipoExpensa(this.consorcio.getCuit(), TipoExpensa.EXTRAORIDINARIA);
         Assertions.assertEquals(70700.0, this.controladorConsorcio.calcularExpensa(this.consorcio.getCuit()));
     }
 

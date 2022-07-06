@@ -31,6 +31,14 @@ public class ControladorConsorcios {
             System.out.println("no se encontro el consorcio");
         }
     }
+
+    public void cleanGastosConsorcio() {
+
+        this.consorcios.forEach(consorcio -> {
+            consorcio.getGastos().clear();
+
+        });
+    }
     public void addConsorcios(Consorcio ...consorcios) {
         Collections.addAll(this.consorcios,consorcios);
     }

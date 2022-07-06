@@ -46,8 +46,8 @@ public class main {
         double sumaExtraordinaria = controladorConsorcio.sumarGastosPorTipoExpensa(consorcio.getCuit(), TipoExpensa.EXTRAORIDINARIA);
         double sumaOrdinaria = controladorConsorcio.sumarGastosPorTipoExpensa(consorcio.getCuit(), TipoExpensa.ORDINARIA);
 
-        System.out.println(sumaExtraordinaria);
-        System.out.println(sumaOrdinaria);
+        System.out.println("Suma extraordinaria = " + sumaExtraordinaria);
+        System.out.println("Suma ordinaria = " +sumaOrdinaria);
 
         controladorConsorcio.calcularExpensa("27896421");
 
